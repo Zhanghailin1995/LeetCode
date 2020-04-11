@@ -5,7 +5,7 @@ package com.gemini.leetcode;
  *
  * @author zhanghailin
  */
-public class LeetCode002_AddTowNumbers {
+public class LeetCode002_AddTwoNumbers {
 
     public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         ListNode dummyHead = new ListNode(0);
