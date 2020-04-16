@@ -10,7 +10,7 @@ public class LeetCode306_IsAdditiveNumber {
 
     // TODO 重做
     public boolean isAdditiveNumber(String num) {
-        return backtrack(num, 0, 0, 0, 0);
+        return backtrack2(num, 0, 0, 0, 0);
         //第一个0：从num的0号位置开始计算
         //第二个0：前面两个数的总和初始为0
         //第三个0：前面一个数的值初始为0
@@ -46,9 +46,31 @@ public class LeetCode306_IsAdditiveNumber {
         return sum == s ? s : -1;
     }
 
+
+    private boolean backtrack2(String s, int p, long pre1, long pre2, int deep) {
+        if (deep > 2 && p >= s.length()) return true;
+        for (int i = 1; i + p <= s.length(); i++) {
+            String sub = s.substring(p, p + i);
+            if (sub.charAt(0) == '0' && sub.length() > 1) return false;
+            long num = parseLong(sub, i);
+            if (deep < 2 || num == (pre1 + pre2)) {
+                if (backtrack2(s, p + i, pre2, num, deep + 1)) return true;
+            }
+        }
+        return false;
+    }
+
+    private long parseLong(String str, int len) {
+        long s = 0;
+        for (int i = 0; i < len; i++) {
+            s = s * 10 + str.charAt(i) - '0';
+        }
+        return s;
+    }
+
     public static void main(String[] args) {
         LeetCode306_IsAdditiveNumber isAdditiveNumber = new LeetCode306_IsAdditiveNumber();
-        System.out.println(isAdditiveNumber.isAdditiveNumber("112358"));
+        System.out.println(isAdditiveNumber.isAdditiveNumber("199100199"));
         //System.out.println("111".substring(2, 3));
     }
 }
