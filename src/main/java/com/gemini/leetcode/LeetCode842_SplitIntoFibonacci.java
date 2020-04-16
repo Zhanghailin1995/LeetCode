@@ -72,11 +72,11 @@ public class LeetCode842_SplitIntoFibonacci {
             long numL = Long.parseLong(s.substring(p, p + i));
             //判断是否超出范围,或者deep不是0,1却大于他的前两个数之和
             if (numL > Integer.MAX_VALUE ||
-                    (deep != 0 && deep != 1 && numL > (pre1 + pre2))) break;
+                    (deep > 1 && numL > (pre1 + pre2))) break;
             //转成int
             Integer num = (int) numL;
             //满足条件的数,递归加回溯
-            if (deep == 0 || deep == 1 || num.equals(pre1 + pre2)) {
+            if (deep <= 1 || num.equals(pre1 + pre2)) {
                 res.add(num);
                 if (dfs(p + i, s, pre2, num, deep + 1)) return true;
                 res.remove(num);
