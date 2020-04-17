@@ -43,7 +43,7 @@ public class LeetCode022_GenerateParenthesis {
         }
 
         if (left > 0) { // 如果左括号还剩余的话，可以拼接左括号
-            dfs(left - 1, right, curStr + "(");
+            dfs(left - 1, right, curStr + "("); // curStr + ")" 后curStr 依旧是 当前值，而不是多了一个")",所以不需要remove的操作
         }
         if (right > left) { // 如果右括号剩余多于左括号剩余的话，可以拼接右括号
             dfs(left, right - 1, curStr + ")");
@@ -63,16 +63,16 @@ public class LeetCode022_GenerateParenthesis {
                 result.add(new String(current));
         } else {
             current[pos] = '(';
-            generateAll(current, pos+1, result);
+            generateAll(current, pos + 1, result);
             current[pos] = ')';
-            generateAll(current, pos+1, result);
+            generateAll(current, pos + 1, result);
         }
     }
 
 
     public boolean valid(char[] current) {
         int balance = 0;
-        for (char c: current) {
+        for (char c : current) {
             if (c == '(') balance++;
             else balance--;
             if (balance < 0) return false;
@@ -82,7 +82,16 @@ public class LeetCode022_GenerateParenthesis {
 
 
     public static void main(String[] args) {
-        LeetCode022_GenerateParenthesis generateParenthesis = new LeetCode022_GenerateParenthesis();
-        generateParenthesis.generateParenthesis(3).forEach(System.out::println);
+        /*LeetCode022_GenerateParenthesis generateParenthesis = new LeetCode022_GenerateParenthesis();
+        generateParenthesis.generateParenthesis(3).forEach(System.out::println);*/
+        String curStr = "(";
+        addStr(curStr+")");
+        System.out.println(curStr);
     }
+
+    private static void addStr(String s) {
+        s.concat(")");
+    }
+
+
 }
