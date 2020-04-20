@@ -40,15 +40,11 @@ public class LeetCode094_InOrderTraversal {
     }
 
     public void helper(TreeNode root, List<Integer> res) {
-        if (root != null) {
-            if (root.left != null) {
-                helper(root.left, res);
-            }
-            res.add(root.val);
-            if (root.right != null) {
-                helper(root.right, res);
-            }
-        }
+        if (root == null) return;
+        helper(root.left, res);
+        res.add(root.val);
+        helper(root.right, res);
+
     }
 
     // 找当前节点的左子树的最右子节点，并将最右子节点指向当前节点
