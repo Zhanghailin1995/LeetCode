@@ -44,4 +44,12 @@ public class LeetCode105_BuildTree {
         return root;
     }
 
+    public static void main(String[] args) {
+        int[] io = new int[]{3, 9, 20, 15, 7};
+        int[] po = new int[]{9, 3, 15, 20, 7};
+
+        LeetCode105_BuildTree leetCode105_buildTree = new LeetCode105_BuildTree();
+        leetCode105_buildTree.buildTree(io, po);
+    }
+
 }
