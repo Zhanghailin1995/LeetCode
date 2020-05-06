@@ -1,9 +1,7 @@
 package com.gemini.leetcode.tree;
 
 import javafx.util.Pair;
-import sun.awt.image.ImageWatched;
 
-import java.util.LinkedList;
 import java.util.Stack;
 
 /**
