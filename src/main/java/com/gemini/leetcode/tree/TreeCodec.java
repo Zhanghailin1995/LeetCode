@@ -1,9 +1,5 @@
 package com.gemini.leetcode.tree;
 
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
-
 /**
  * com.gemini.leetcode.tree.TreeCodec
  * 297. 二叉树的序列化与反序列化
@@ -15,11 +11,11 @@ import java.util.List;
  * <p>
  * 你可以将以下二叉树：
  * <p>
- *   1
- *  / \
+ * 1
+ * / \
  * 2   3
- *    / \
- *   4   5
+ * / \
+ * 4   5
  * <p>
  * 序列化为 "[1,2,3,null,null,4,5]"
  * 提示: 这与 LeetCode 目前使用的方式一致，详情请参阅 LeetCode 序列化二叉树的格式。你并非必须采取这种方式，你也可以采用其他的方法解决这个问题。
@@ -30,17 +26,17 @@ import java.util.List;
  */
 public class TreeCodec {
 
-    // Encodes a tree to a single string.
+    /*// Encodes a tree to a single string.
     public String serialize(TreeNode root) {
-        return rserialize(root, "");
+        return rserialize(root, new StringBuilder()).toString();
     }
 
-    private String rserialize(TreeNode root, String str) {
+    private StringBuilder rserialize(TreeNode root, StringBuilder str) {
         if (root == null) {
-            str += "null,";
+            str.append("null,");
         } else {
-            str += root.val + ",";
-            str = rserialize(root.left, str);
+            str.append(root.val).append(",");
+            str = rserialize(root.left, new StringBuilder(str.toString()));
             str = rserialize(root.right, str);
         }
         return str;
@@ -66,6 +62,53 @@ public class TreeCodec {
         String[] data_array = data.split(",");
         List<String> data_list = new LinkedList<>(Arrays.asList(data_array));
         return rdeserialize(data_list);
+    }*/
+
+    // Encodes a tree to a single string.
+    StringBuilder res = new StringBuilder();
+
+    public String serialize(TreeNode root) {
+        dfs(root);
+        //System.out.println(res.toString());
+        return res.toString();
+    }
+
+    void dfs(TreeNode root) {
+        if (root == null) {
+            res.append("#,");
+            return;
+        }
+        res.append(root.val).append(',');
+        dfs(root.left);
+        dfs(root.right);
+    }
+
+
+    // Decodes your encoded data to tree.
+    int u = 0;
+
+    public TreeNode deserialize(String data) {
+        if (data.charAt(u) == '#') {
+            u += 2;
+            return null;
+        }
+        int sum = 0;
+        boolean isNeg = false;
+        if (data.charAt(u) == '-') {
+            isNeg = true;
+            u++;
+        }
+        while (data.charAt(u) != ',') sum = sum * 10 + data.charAt(u++) - '0';
+        u++;
+        if (isNeg) sum = -sum;
+        TreeNode root = new TreeNode(sum);
+        root.left = deserialize(data);
+        root.right = deserialize(data);
+        return root;
+    }
+
+    public static void main(String[] args) {
+
     }
 
 }
