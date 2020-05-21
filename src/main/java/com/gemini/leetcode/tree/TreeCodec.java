@@ -1,5 +1,9 @@
 package com.gemini.leetcode.tree;
 
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * com.gemini.leetcode.tree.TreeCodec
  * 297. 二叉树的序列化与反序列化
@@ -26,7 +30,7 @@ package com.gemini.leetcode.tree;
  */
 public class TreeCodec {
 
-    /*// Encodes a tree to a single string.
+    // Encodes a tree to a single string.
     public String serialize(TreeNode root) {
         return rserialize(root, new StringBuilder()).toString();
     }
@@ -62,10 +66,10 @@ public class TreeCodec {
         String[] data_array = data.split(",");
         List<String> data_list = new LinkedList<>(Arrays.asList(data_array));
         return rdeserialize(data_list);
-    }*/
+    }
 
     // Encodes a tree to a single string.
-    StringBuilder res = new StringBuilder();
+    /*StringBuilder res = new StringBuilder();
 
     public String serialize(TreeNode root) {
         dfs(root);
@@ -105,7 +109,7 @@ public class TreeCodec {
         root.left = deserialize(data);
         root.right = deserialize(data);
         return root;
-    }
+    }*/
 
     public static void main(String[] args) {
 
