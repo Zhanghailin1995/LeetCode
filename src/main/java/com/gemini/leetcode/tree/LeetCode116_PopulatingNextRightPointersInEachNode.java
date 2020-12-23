@@ -57,13 +57,28 @@ public class LeetCode116_PopulatingNextRightPointersInEachNode {
     }
 
     private void dfs(Node node, Node next) {
-        if(node != null) {
+        if (node != null) {
             node.next = next;
             dfs(node.left, node.right);
             dfs(node.right, node.next != null ? node.next.left : null);
         }
     }
 
+    public Node connect3(Node root) {
+        if (root == null) return null;
+        connectNode(root.left, root.right);
+        return root;
+    }
+
+    private void connectNode(Node left, Node right) {
+        if (left == null || right == null) {
+            return;
+        }
+        left.next = right;
+        connectNode(left.left, left.right);
+        connectNode(left.right, right.left);
+        connectNode(right.left, right.right);
+    }
 
 
 }

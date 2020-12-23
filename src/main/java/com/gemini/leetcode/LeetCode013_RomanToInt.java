@@ -108,7 +108,10 @@ public class LeetCode013_RomanToInt {
     }
 
     public static void main(String[] args) {
-        LeetCode013_RomanToInt romanToInt = new LeetCode013_RomanToInt();
-        System.out.println(romanToInt.romanToInt("MCMXCIV"));
+        /*LeetCode013_RomanToInt romanToInt = new LeetCode013_RomanToInt();
+        System.out.println(romanToInt.romanToInt("MCMXCIV"));*/
+        Long a = 588L;
+        Long b = 588L;
+        System.out.println(a==b);
     }
 }

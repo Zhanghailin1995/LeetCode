@@ -54,6 +54,23 @@ public class LeetCode114_FlattenBinaryTreeToLinkedList {
         flatten(right);
     }
 
+    public void flatten3(TreeNode root) {
+        if (root == null)
+            return;
+        flatten3(root.left);
+        flatten3(root.right);
+
+        TreeNode left = root.left;
+        TreeNode right = root.right;
+        root.left = null;
+        root.right = left;
+        TreeNode p = root;
+        while (p.right != null) {
+            p = p.right;
+        }
+        p.right = right;
+    }
+
     /**************************************分割线**********************************************/
     // 可以从此题很好的理解莫里斯遍历
     //    1.将左子树插入到右子树的地方
