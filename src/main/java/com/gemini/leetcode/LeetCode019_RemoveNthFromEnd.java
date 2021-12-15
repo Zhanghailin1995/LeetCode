@@ -40,6 +40,7 @@ public class LeetCode019_RemoveNthFromEnd {
 
     // 双指针，第一个指针先往前走n个节点，然后第2个指针和第一个指针一起走，第一个指针走到底的时候，第二个指针正好走到n ,删除即可
     // dummy节点是链表中很常用的一种辅助手段
+    // 这里使用哑结点的原因是 输入可能是 [1],1那么这种情况,那么返回正确结果应该是null
     public ListNode removeNthFromEnd2(ListNode head, int n) {
         ListNode dummy = new ListNode(0);
         dummy.next = head;
@@ -56,6 +57,52 @@ public class LeetCode019_RemoveNthFromEnd {
         }
         second.next = second.next.next;
         return dummy.next;
+    }
+
+    public ListNode removeNthFromEnd3(ListNode head, int n) {
+        // 虚拟头结点
+        ListNode dummy = new ListNode(-1);
+        dummy.next = head;
+        // 删除倒数第 n 个，要先找倒数第 n + 1 个节点
+        // 我他妈的真是笨啊，就算加入了一个哑结点，这个链表的倒数第n个节点也是不会变的，所以算法是完全有用的，不会因为你在前面加了多少个节点而改变结果
+        ListNode x = findFromEnd(dummy, n + 1);
+        // 删掉倒数第 n 个节点
+        x.next = x.next.next;
+        return dummy.next;
+    }
+
+    ListNode findFromEnd(ListNode head, int k) {
+        ListNode p1 = head;
+        for (int i = 0; i < k; i++) {
+            p1 = p1.next;
+        }
+        ListNode p2 = head;
+        // p1 和 p2 同时走 n - k 步
+        while (p1 != null) {
+            p2 = p2.next;
+            p1 = p1.next;
+        }
+        // p2 现在指向第 n - k 个节点
+        return p2;
+    }
+
+    public static void main(String[] args) {
+        LeetCode019_RemoveNthFromEnd l = new LeetCode019_RemoveNthFromEnd();
+        ListNode l1 = new ListNode(1);
+        ListNode l2 = new ListNode(2);
+        ListNode l3 = new ListNode(3);
+        ListNode l4 = new ListNode(4);
+        ListNode l5 = new ListNode(5);
+        l1.next = l2;
+        l2.next = l3;
+        l3.next = l4;
+        l4.next = l5;
+        ListNode r1 = l.findFromEnd(l1, 2);
+        System.out.println(r1);
+        ListNode res = l.removeNthFromEnd3(l1, 2);
+
+
+        System.out.println(res);
     }
 }
 

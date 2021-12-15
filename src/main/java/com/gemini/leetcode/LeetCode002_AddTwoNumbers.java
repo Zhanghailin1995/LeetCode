@@ -51,4 +51,15 @@ class ListNode {
     ListNode(int x) {
         val = x;
     }
+
+    @Override
+    public String toString() {
+        String head = String.valueOf(val);
+        ListNode p = next;
+        while (p != null) {
+            head += "->" +p.val;
+            p = p.next;
+        }
+        return head;
+    }
 }

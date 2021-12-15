@@ -25,7 +25,7 @@ public class ReversePolishNotation {
     public static void main(String[] args) {
         // Scanner sc = new Scanner(System.in);
         //注意使用nextLine方法来接收可能的空格
-        char[] s = "(1+2)*3".toCharArray();
+        char[] s = "1+6/3".toCharArray();
 		/*for(int i = 0; i < s.length; i++){
 			System.out.println(s[i]);
 		}*/
