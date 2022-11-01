@@ -1,9 +1,6 @@
 package com.gemini.leetcode;
 
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -45,10 +42,8 @@ public class LeetCode127_LadderLength {
 
     // BFS
     // 1. beginWord入队列
-    // 2. 从队列头部取出word，计算该单词可能的变种word
-    // 3. 判断该变种word是否在wordList中
-    // 3.1 如果在wordList中，且等于endWord,直接返回结果,如果不等于endWord，则加入队列尾部
-    // 3.2 如果不在wordList中，则跳过
+    // 2. 从队列头部取出word，计算该单词可能的变种word（变种只可以从wordList中取）
+    // 3. 如果该变种word中，等于endWord,直接返回结果,如果不等于endWord，则加入队列尾部（为避免重复记录，需要一个哈希表记录已经处理过的变种word，处理过的直接跳过）
     // 4. 遍历完该word的所有变种word后继续开始下一轮循环，从队列头取出下一个word
     // 5. 如果队列为空，则说明算法结束，未找到结果，结束
     public int ladderLength(String beginWord, String endWord, List<String> wordList) {
@@ -84,6 +79,84 @@ public class LeetCode127_LadderLength {
             }
         }
         return 0;
+    }
+
+    // 双向BFS
+    //
+    // d1、d2 为两个方向的队列
+    // m1、m2 为两个方向的哈希表，记录每个节点距离起点距离的
+    // 只有两个队列都不空，才有必要继续往下搜索
+    // 如果其中一个队列空了，说明从某个方向搜到底都搜索不到该方向的目标节点
+    // while (!d1.isEmpty() && !d2.isEmpty()) {
+    //      if (d1.size() < d2.size()) {
+    //          update(d1, m1, m2);
+    //      } else {
+    //          update(d2, m2, m1);
+    //      }
+    // }
+    //
+    // void update(Queue d, Map cur, Map other) {}
+    public int ladderLength2(String beginWord, String endWord, List<String> wordList) {
+        if (beginWord.equals(endWord)) {
+            return 0;
+        }
+        if (!wordList.contains(endWord)) {
+            return 0;
+        }
+
+        Queue<String> q1 = new LinkedList<>();
+        Queue<String> q2 = new LinkedList<>();
+        q1.offer(beginWord);
+        q2.offer(endWord);
+
+        Map<String, Integer> m1 = new HashMap<>();
+        Map<String, Integer> m2 = new HashMap<>();
+
+        m1.put(beginWord, 0);
+        m2.put(endWord, 0);
+        int result = -1;
+        while (!q1.isEmpty() && !q2.isEmpty()) {
+            if (q1.size() <= q2.size()) {
+                result = update(q1, m1, m2, wordList);
+            } else {
+                result = update(q2, m2, m1, wordList);
+            }
+            if (result != -1) {
+                return result + 1;
+            }
+        }
+        return 0;
+    }
+
+    // 双向BFS其中处理的内部逻辑是类似的
+    // 1. 从当前处理的队列头中取出word
+    // 2. 获取该word的可能变种List<String> nextWords
+    // 3. 遍历nextWords，已经处理过的直接跳过，否则判断另外一个方向的处理过程中是否处理过该变种word
+    // 4. 如果是的话，直接返回结果， 不是的话，记录一下该变种word已经处理过，并且将该word加入队列
+    //
+    public int update(Queue<String> q, Map<String, Integer> cur, Map<String, Integer> other, List<String> wordList) {
+        int size = q.size();
+        for (int i = 0; i < size; i++) {
+            String word = q.poll();
+            int step = cur.get(word);
+            List<String> nextWords = get(word, wordList);
+            if (nextWords != null && !nextWords.isEmpty()) {
+                for (String nextWord : nextWords) {
+                    if (cur.containsKey(nextWord)) {
+                        continue;
+                    }
+
+                    if (other.containsKey(nextWord)) {
+                        return step + 1 + other.get(nextWord);
+                    } else {
+                        cur.put(nextWord, step + 1);
+                        q.offer(nextWord);
+                    }
+                }
+
+            }
+        }
+        return -1;
     }
 
     public List<String> get(String word, List<String> wordList) {
