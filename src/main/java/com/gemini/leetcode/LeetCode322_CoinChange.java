@@ -24,16 +24,35 @@ import java.util.Arrays;
  * 你可以认为每种硬币的数量是无限的。
  * <p>
  * 来源：力扣（LeetCode）
- * 链接：https://leetcode-cn.com/problems/coin-change
+ * 链接：<a href="https://leetcode-cn.com/problems/coin-change">...</a>
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  *
  * @author zhanghailin
  */
 public class LeetCode322_CoinChange {
 
+    // DP 思路
+    // 确定base case
+    // 找到状态转移方程
+    // 确定dp数组的定义
+    // 是否有可以优化的空间 dp重复子问题等
     public int coinChange(int[] coins, int amount) {
         if (amount < 1) return 0;
         return coinChange(coins, amount, new int[amount + 1]);
+    }
+
+    // 状态转移方程dp[i] = min(dp[i], dp[i - coin] + 1)
+    public int coinChange1(int coins[], int amount) {
+        // base case
+        if (amount == 0) return 0;
+        if (amount < 0) return -1;
+        int res = Integer.MAX_VALUE;
+        for (int coin : coins) {
+            int subProblem = coinChange1(coins, amount - coin);
+            if (subProblem == -1) continue; // 子问题无解，跳过
+            res = Math.min(res, subProblem + 1);
+        }
+        return res != Integer.MAX_VALUE ? res : -1;
     }
 
     private int coinChange(int[] coins, int rem, int[] dp) {
