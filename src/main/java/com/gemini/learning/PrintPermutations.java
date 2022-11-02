@@ -45,7 +45,7 @@ public class PrintPermutations {
         for (int m = i; m < j; m++) {
             if (data[m] == data[j]) {
                 System.out.println(Arrays.toString(data));
-                System.out.println(String.format("i:%d,m:%d,j:%d", i, m, j));
+                System.out.printf("i:%d,m:%d,j:%d%n", i, m, j);
                 return false;
             }
         }
@@ -57,7 +57,7 @@ public class PrintPermutations {
         if (i == j) return true;
         if (data[i] == data[j]) {
             System.out.println(Arrays.toString(data));
-            System.out.println(String.format("i:%d,j:%d", i, j));
+            System.out.printf("i:%d,j:%d%n", i, j);
             return false;
         }
         return true;
