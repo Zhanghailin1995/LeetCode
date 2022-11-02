@@ -1,5 +1,7 @@
 package com.gemini.leetcode.tree;
 
+import com.gemini.support.TreeNode;
+
 /**
  * com.gemini.leetcode.tree.LeetCode222_CountCompleteTreeNodes
  * 222. 完全二叉树的节点个数

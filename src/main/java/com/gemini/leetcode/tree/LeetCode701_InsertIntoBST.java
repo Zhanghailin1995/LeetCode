@@ -1,5 +1,7 @@
 package com.gemini.leetcode.tree;
 
+import com.gemini.support.TreeNode;
+
 /**
  * https://leetcode-cn.com/problems/insert-into-a-binary-search-tree/
  * com.gemini.leetcode.tree.LeetCode701_InsertIntoBST

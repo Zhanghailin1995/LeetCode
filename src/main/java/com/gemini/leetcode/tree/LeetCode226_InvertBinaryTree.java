@@ -1,6 +1,8 @@
 package com.gemini.leetcode.tree;
 
 
+import com.gemini.support.TreeNode;
+
 /**
  * 226. Invert Binary Tree
  * Invert a binary tree.

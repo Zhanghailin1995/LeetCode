@@ -1,5 +1,7 @@
 package com.gemini.leetcode.tree;
 
+import com.gemini.support.TreeNode;
+
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -53,7 +55,7 @@ public class TreeCodec {
             return null;
         }
 
-        TreeNode root = new TreeNode(Integer.valueOf(l.get(0)));
+        TreeNode root = new TreeNode(Integer.parseInt(l.get(0)));
         l.remove(0);
         root.left = rdeserialize(l);
         root.right = rdeserialize(l);

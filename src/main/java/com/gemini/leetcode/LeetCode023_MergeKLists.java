@@ -1,10 +1,12 @@
-package com.gemini.leetcode.linkedlist;
+package com.gemini.leetcode;
+
+import com.gemini.support.ListNode;
 
 import java.util.Comparator;
 import java.util.PriorityQueue;
 
 /**
- * com.gemini.leetcode.linkedlist.LeetCode023_MergeKLists
+ * com.gemini.leetcode.LeetCode023_MergeKLists
  * 给你一个链表数组，每个链表都已经按升序排列。
  * <p>
  * 请你将所有链表合并到一个升序链表中，返回合并后的链表。

@@ -1,5 +1,7 @@
 package com.gemini.leetcode.tree;
 
+import com.gemini.support.TreeNode;
+
 import java.util.Stack;
 
 /**

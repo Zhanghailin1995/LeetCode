@@ -1,5 +1,7 @@
 package com.gemini.leetcode;
 
+import com.gemini.support.ListNode;
+
 /**
  * com.gemini.leetcode.LeetCode002_AddTowNumbers
  *
@@ -43,23 +45,3 @@ public class LeetCode002_AddTwoNumbers {
 
 }
 
-
-class ListNode {
-    int val;
-    ListNode next;
-
-    ListNode(int x) {
-        val = x;
-    }
-
-    @Override
-    public String toString() {
-        String head = String.valueOf(val);
-        ListNode p = next;
-        while (p != null) {
-            head += "->" +p.val;
-            p = p.next;
-        }
-        return head;
-    }
-}

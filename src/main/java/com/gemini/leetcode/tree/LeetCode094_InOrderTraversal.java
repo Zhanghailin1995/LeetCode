@@ -1,5 +1,7 @@
 package com.gemini.leetcode.tree;
 
+import com.gemini.support.TreeNode;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -83,23 +85,6 @@ public class LeetCode094_InOrderTraversal {
         TreeNode root = Tool.createTree(array);
         List<Integer> list = inOrderTraversal.morrisInOrderTraversal(root);
         System.out.println(list.toString());
-    }
-}
-
-class TreeNode {
-    int val;
-    TreeNode left;
-    TreeNode right;
-
-    TreeNode(int x) {
-        val = x;
-    }
-
-    @Override
-    public String toString() {
-        return "TreeNode{" +
-                "val=" + val +
-                '}';
     }
 }
 

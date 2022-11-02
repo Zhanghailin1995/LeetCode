@@ -1,5 +1,7 @@
 package com.gemini.leetcode;
 
+import com.gemini.support.ListNode;
+
 /**
  * com.gemini.leetcode.LeetCode019_RemoveNthFromEnd
  *

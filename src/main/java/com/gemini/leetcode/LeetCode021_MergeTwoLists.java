@@ -1,10 +1,12 @@
-package com.gemini.leetcode.linkedlist;
+package com.gemini.leetcode;
+
+import com.gemini.support.ListNode;
 
 /**
  * 将两个升序链表合并为一个新的 升序 链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。
  *
  *
- * com.gemini.leetcode.linkedlist.LeetCode021_MergeTwoLists
+ * com.gemini.leetcode.LeetCode021_MergeTwoLists
  * 输入：l1 = [1,2,4], l2 = [1,3,4]
  * 输出：[1,1,2,3,4,4]
  * 示例 2：
